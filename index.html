@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="NEBULX // VORTEX HOODIE">
+    <meta property="og:description" content="Limited Drop. 100 Pieces.">
+    <meta property="og:image" content="link-to-your-hoodie-image.jpg">
+    <title>NEBULX // LIMITED DROP</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+      <nav class="reveal nav-reveal">
+    <div class="logo">NEBULX</div>
+    <div class="nav-links">
+        <a href="#" class="active">ARCHIVE</a>
+        <a href="#">INFO</a>
+        <button id="menu-toggle">MENU</button>
+    </div>
+</nav>
+
+
+<div id="mobile-menu" class="menu-overlay">
+    <button id="menu-close">CLOSE</button>
+    <div class="overlay-content">
+        <a href="#">COLLECTIONS</a>
+        <a href="#">EDITORIAL</a>
+        <a href="#">STORES</a>
+        <a href="#">CONTACT</a>
+    </div>
+</div>
+
+    <main class="hero">
+        <!-- Optional: info for me Add a high-res image here later --> 
+        <div class="overlay"></div>
+        
+        <div class="content">
+            <!-- <div class="product-placeholder"></div> -->
+            <span class="badge">SEASON_01 // DROP_04</span>
+            <h1 class="reveal hero-reveal">
+    VORTEX <br> HOODIE
+</h1>
+            
+           <div class="countdown">
+    <div class="time-block">
+        <span class="number" id="days">00</span>
+        <span class="label">DAYS</span>
+    </div>
+    <div class="time-block">
+        <span class="number" id="hours">00</span>
+        <span class="label">HRS</span>
+    </div>
+    <div class="time-block">
+        <span class="number" id="minutes">00</span>
+        <span class="label">MINS</span>
+    </div>
+    <div class="time-block">
+        <span class="number" id="seconds">00</span>
+        <span class="label">SECS</span>
+    </div>
+</div>
+
+            <form class="notify-form reveal form-reveal">
+    <input type="email" placeholder="ENTER EMAIL FOR ACCESS" required>
+    <button type="submit">NOTIFY ME</button>
+</form>
+        </div>
+    </main>
+
+    <footer>
+    <p>©2026 NEBULX STUDIO.</p>
+    <a href="#" id="copy-email">
+        CONTACT@NEBULX.COM
+    </a>
+    <p>LIMITED TO 100 PIECES.</p>
+
+    <p>DEVELOPED BY Karuva Tech // 2026</p>
+</footer>
+
+
+
+    <script>
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+// Open Menu
+        menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden'; // Locks the background
+});
+
+// Close Menu
+        menuClose.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = 'auto'; // Re-enables scrolling
+});
+
+// Close menu if a link inside it is clicked
+        document.querySelectorAll('.overlay-content a').forEach(link => {
+           link.addEventListener('click', () => {
+           mobileMenu.classList.remove('open');
+    });
+});
+    // Set the date we're counting down to (Adjust this date!)
+    const dropDate = new Date("December 1, 2026 00:00:00").getTime();
+
+    // Update the count down every 1 second
+    const timerEffect = setInterval(function() {
+
+        
+        const now = new Date().getTime();
+
+       
+        const distance = dropDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Output the result in the elements with id="days/hours/etc"
+        document.getElementById("days").innerHTML = d.toString().padStart(2, '0');
+        document.getElementById("hours").innerHTML = h.toString().padStart(2, '0');
+        document.getElementById("minutes").innerHTML = m.toString().padStart(2, '0');
+        document.getElementById("seconds").innerHTML = s.toString().padStart(2, '0');
+
+        // If the count down is over, write some text 
+        if (distance < 0) {
+            clearInterval(timerEffect);
+            document.querySelector(".countdown").innerHTML = "DROP IS LIVE";
+        }
+    }, 1000);
+
+
+    // Get all navigation links
+const navLinks = document.querySelectorAll('.nav-links a');
+
+
+navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        // Prevent the page from jumping/reloading since these are dummy links
+        e.preventDefault();
+
+       
+        navLinks.forEach(item => item.classList.remove('active'));
+
+      
+        this.classList.add('active');
+        
+        
+        console.log('Active section switched to:', this.innerText);
+    });
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(el => el.classList.add('active'));
+});
+const emailLink = document.querySelector('#copy-email');
+if(emailLink) {
+    emailLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        const email = "contact@nebulx.com";
+        
+       
+        navigator.clipboard.writeText(email).then(() => {
+          
+            const originalText = this.innerText;
+            this.innerText = "COPIED TO CLIPBOARD";
+            this.style.color = "#ccff00";
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                this.innerText = originalText;
+                this.style.color = "";
+            }, 2000);
+        });
+    });
+}
+</script>
+
+</body>
+</html>
